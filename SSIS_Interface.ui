@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1315</width>
+    <height>564</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: #18191a</string>
+   </property>
+   <widget class="QFrame" name="SideFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>201</width>
+      <height>561</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic UI Semibold</family>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #242526</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QStackedWidget" name="SideStackWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>80</y>
+       <width>201</width>
+       <height>481</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="QWidget" name="Default">
+      <widget class="QFrame" name="frame_8">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string> VIEW MODE</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="AddStudentPage">
+      <widget class="QLineEdit" name="Name">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Student Name</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 1px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QLineEdit */
+    text-align: center;
+}
+
+QLineEdit::placeholder {
+    color: #00C9FF;  /* Text color of placeholder */
+    text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Name</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="StudentID">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>190</y>
+         <width>95</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Student ID</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+border: 1px solid #00C9FF;
+color: #00C9FF;
+text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>XXXX-XXXX</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="Gender">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>260</y>
+         <width>60</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Gender</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    border: 1px solid #00C9FF;
+}</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="YearLevel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>141</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Student Year Level</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+border: 1px solid #00C9FF;
+color: #00C9FF;
+text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Year Level</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="CouseCode">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>230</y>
+         <width>101</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Course Code</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    border: 1px solid #00C9FF;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frame">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string>ADD STUDENT</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="SaveStudent">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>320</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Add Student</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>ADD</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="AddCoursePage">
+      <widget class="QFrame" name="frame_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string>ADD COURSE</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLineEdit" name="CourseCodeAdd">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>230</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Course Code</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 1px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QLineEdit */
+    text-align: center;
+}
+
+QLineEdit::placeholder {
+    color: #00C9FF;  /* Text color of placeholder */
+    text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Course Code</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="SaveCourse">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>320</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Add Course</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>ADD</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="CourseNameAdd">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>171</width>
+         <height>64</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Course Name</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit {
+    border: 1px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QTextEdit */
+    background-color: transparent;  /* Make the background transparent */
+    padding: 5px;  /* Add padding for better visibility */
+}
+
+QTextEdit::placeholder {
+    color: #00C9FF;  /* Text color of placeholder */
+    background-color: transparent;  /* Make the background transparent */
+}
+
+QScrollBar:vertical {
+    width: 10px;  /* Customize vertical scrollbar width */
+}
+
+QScrollBar::handle:vertical {
+    background-color: #00C9FF;  /* Customize scrollbar handle color */
+    border-radius: 5px;  /* Add border radius to scrollbar handle */
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Course Name</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="EditStudentPage">
+      <widget class="QLineEdit" name="NameEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Student Name</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 1px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QLineEdit */
+    text-align: center;
+}
+
+QLineEdit::placeholder {
+    color: #00C9FF;  /* Text color of placeholder */
+    text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Name</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="YearLevelEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>141</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Student Year Level</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+border: 1px solid #00C9FF;
+color: #00C9FF;
+text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Year Level</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="StudentIDEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>95</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Student ID</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+border: 1px solid #00C9FF;
+color: #00C9FF;
+text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>XXXX-XXXX</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="CouseCodeEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>250</y>
+         <width>101</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Course Code</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    border: 1px solid #00C9FF;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="GenderEdit">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>250</y>
+         <width>60</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Gender</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    border: 1px solid #00C9FF;
+}</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="SaveStudentEdit">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>320</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Save Changes</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>SAVE</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frame_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string>EDIT STUDENT</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="EditCoursePage">
+      <widget class="QFrame" name="frame_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string>EDIT COURSE</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QTextEdit" name="CourseNameEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>171</width>
+         <height>64</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Course Name</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit {
+    border: 1px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QTextEdit */
+    background-color: transparent;  /* Make the background transparent */
+    padding: 5px;  /* Add padding for better visibility */
+}
+
+QTextEdit::placeholder {
+    color: #00C9FF;  /* Text color of placeholder */
+    background-color: transparent;  /* Make the background transparent */
+}
+
+QScrollBar:vertical {
+    width: 10px;  /* Customize vertical scrollbar width */
+}
+
+QScrollBar::handle:vertical {
+    background-color: #00C9FF;  /* Customize scrollbar handle color */
+    border-radius: 5px;  /* Add border radius to scrollbar handle */
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Course Name</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="CourseCodeCourseEdit">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>240</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Course Code</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 1px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QLineEdit */
+    text-align: center;
+}
+
+QLineEdit::placeholder {
+    color: #00C9FF;  /* Text color of placeholder */
+    text-align: center;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Course Code</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="SaveCourseEdit">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>320</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Save Changes</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #00C9FF;
+    color: #00C9FF;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>SAVE</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="DeletePage">
+      <widget class="QFrame" name="frame_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FF073A;
+}</string>
+        </property>
+        <property name="text">
+         <string>DELETE MODE</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>200</y>
+         <width>161</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>Click on the Student or Course</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>121</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>That you wish to delete</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_7">
+       <property name="geometry">
+        <rect>
+         <x>25</x>
+         <y>120</y>
+         <width>151</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>! WARNING !</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="DefaultEditPage">
+      <widget class="QFrame" name="frame_9">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string> EDIT MODE</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_10">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>120</y>
+         <width>161</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #00C9FF;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_13">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string>Click on the Student or Course</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>121</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #00C9FF;
+}</string>
+        </property>
+        <property name="text">
+         <string>That you wish to Edit</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>47</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>:/icons/CSC 151 Assignment 2/icons/letter-s.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>15</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft Sans Serif</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white
+</string>
+     </property>
+     <property name="text">
+      <string>SSIS</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="MainFrame">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>80</y>
+      <width>1111</width>
+      <height>481</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QTableWidget" name="StudentTable">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>601</width>
+       <height>471</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QHeaderView::section {
+    background-color: #00C9FF;
+}</string>
+     </property>
+     <column>
+      <property name="text">
+       <string>Student ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Year Level</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Gender</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Course Code</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QTableWidget" name="CourseTable">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>10</y>
+       <width>461</width>
+       <height>471</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QHeaderView::section {
+    background-color: #00C9FF;
+}</string>
+     </property>
+     <column>
+      <property name="text">
+       <string>Course Code</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Course Name</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="UpperFrame">
+    <property name="geometry">
+     <rect>
+      <x>199</x>
+      <y>0</y>
+      <width>1131</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #3a3b3c</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="SearchStudent">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>50</y>
+       <width>191</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Enter Student ID</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+border: 2px solid #00C9FF;
+color: #00C9FF;
+text-align: center;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>XXXX-XXXX</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SearchCourse">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>50</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Enter Course Code</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+border: 2px solid #00C9FF;
+color: #00C9FF;
+text-align: center;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>ex. BSCS</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SearchStudentB">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Search Student</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/zoom-in.png</normaloff>:/icons/CSC 151 Assignment 2/icons/zoom-in.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="EditButton">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Edit Mode</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/edit.png</normaloff>:/icons/CSC 151 Assignment 2/icons/edit.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="DeleteButton">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Delete Mode</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/delete.png</normaloff>:/icons/CSC 151 Assignment 2/icons/delete.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ViewButton">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>View Mode</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/eye-test.png</normaloff>:/icons/CSC 151 Assignment 2/icons/eye-test.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SearchCourseB">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>50</y>
+       <width>31</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Search Course</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/zoom-in.png</normaloff>:/icons/CSC 151 Assignment 2/icons/zoom-in.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="AddStudentB">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Add Student</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/plus.png</normaloff>:/icons/CSC 151 Assignment 2/icons/plus.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="AddCourseB">
+     <property name="geometry">
+      <rect>
+       <x>880</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Add Course</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/icons/CSC 151 Assignment 2/icons/plus.png</normaloff>:/icons/CSC 151 Assignment 2/icons/plus.png</iconset>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
