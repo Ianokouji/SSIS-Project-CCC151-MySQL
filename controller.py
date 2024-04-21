@@ -656,7 +656,7 @@ class Controller:
     def update_gender_combobox_EDIT(self):
         # Clear existing items in the GenderEdit QComboBox
         self.ui.GenderEdit.clear()
-        self.gender_options = ["Male", "Female"]
+        self.gender_options = ["M", "F"]
         # Add items to the GenderEdit QComboBox based on the gender_options list
         self.ui.GenderEdit.addItems(self.gender_options)
 
@@ -710,7 +710,7 @@ class Controller:
     def update_gender_combobox(self):
         # Clear existing items in the GenderEdit QComboBox
         self.ui.Gender.clear()
-        self.gender_options = ["Male", "Female"]
+        self.gender_options = ["M", "F"]
         # Add items to the GenderEdit QComboBox based on the gender_options list
         self.ui.Gender.addItems(self.gender_options)
 
