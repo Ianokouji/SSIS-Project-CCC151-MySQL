@@ -1,5 +1,17 @@
 import mysql.connector
 
+
+'''
+Contents of this file:
+1.Class that creates student object
+2.Class that creates course object
+3.Class that performs operations on students
+4.Class that performs operations on course 
+'''
+
+
+
+# Establish Connection between python file and database
 db = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -26,20 +38,24 @@ class CourseOperations:
             password=password,
             database=database
         )
-        self.mycursor = self.mydb.cursor()
-        self.courses = self.load_courses_from_mysql()
+        self.mycursor = self.mydb.cursor()                              # Creates Cursor for database queries
+        self.courses = self.load_courses_from_mysql()                   # Dictionary that contains the courses loaded from the database
 
+
+    # Loader function that retrieves data from the database and stores in the dictionary
     def load_courses_from_mysql(self):
-        courses = {}
+        courses = {}                        
         self.mycursor.execute("SELECT * FROM COURSES")
         rows = self.mycursor.fetchall()
         for row in rows:
-            course_code = row[0]  # Assuming the first column is course code
-            course_name = row[1]  # Assuming the second column is course name
+            course_code = row[0]
+            course_name = row[1]  
             courses[course_code] = Course(course_name=course_name, course_code=course_code)
         return courses
 
     
+    # Save function that saves the updated version of the dictionary to the database
+    # Checks if the course already exists: If so then Update : If not then Insert
     def save_courses_to_mysql(self):
         for course_code in self.courses:
             course_name = self.courses[course_code].course_name
@@ -61,20 +77,20 @@ class CourseOperations:
 
 
 
-
+    # Adds the course to the dictionary and calls the save function to save action
     def add_course(self, course):
         # Check if the course already exists
         if course.course_code in self.courses:
-            return False                            # Course already exists             
+            return False                                     
 
         self.courses[course.course_code] = course
         self.save_courses_to_mysql()
-        return True                                         # Course added successfully
+        return True                                         
 
 
 
 
-
+    # Deletes the course by calling the DeleteCourse Stored Procedure 
     def delete_course(self, course_code):
         if course_code in self.courses:  # Check if the course code exists in the courses Dictionary
             # Delete the course from the courses table
@@ -83,7 +99,6 @@ class CourseOperations:
             self.mydb.commit()
 
             # Update the local courses dictionary
-            #del self.courses[course_code]
             self.courses.pop(course_code)
             self.save_courses_to_mysql()
 
@@ -92,13 +107,15 @@ class CourseOperations:
             return False  # Return False for unsuccessful action
 
    
-
+    
+    # Updates the course by calling the UpdateCourse Procedure
+    # Also updates local dictionary
     def update_course(self, course_code_old, course_code_new, course_name_new):
         sql_update_course = "CALL UpdateCourse(%s, %s, %s)"
         values_update_course = (course_code_new, course_name_new, course_code_old)
         self.mycursor.execute(sql_update_course, values_update_course)
         self.mydb.commit()
-        self.load_courses_from_mysql()
+        
 
         if course_code_old in self.courses:
             course_obj = self.courses.pop(course_code_old)  # Remove the old course object
@@ -117,8 +134,6 @@ class Student:
         self.Gender = Gender
         self.Course_code = Course_code
 
-    #def __str__(self):
-        #return f"Student ID: {self.Student_id}, Name: {self.Name}, Gender: {self.Gender}, Year Level: {self.Year_level}, Course Code: {self.Course_code}"
     
 # Class that contains operations on all Students
 class StudentOperations:
@@ -129,9 +144,11 @@ class StudentOperations:
             password=password,
             database=database
         )
-        self.mycursor = self.mydb.cursor()
-        self.students = self.load_students_from_mysql()
+        self.mycursor = self.mydb.cursor()                       # Creates Cursor for database queries
+        self.students = self.load_students_from_mysql()          # Dictionary that contains the students loaded from the database
 
+
+    # Loader function that retrieves data from the database and stores in the dictionary
     def load_students_from_mysql(self):
         students = {}
         self.mycursor.execute("SELECT * FROM STUDENTS")
@@ -146,6 +163,9 @@ class StudentOperations:
                                            Year_level=year_level, Gender=gender, Course_code=course_code)
         return students
     
+
+    # Save function that saves the updated version of the dictionary to the database
+    # Checks if the student already exists: If so then Update : If not then Insert
     def save_students_to_mysql(self):
         for student_id, student in self.students.items():
             student_name = student.Name
@@ -170,15 +190,19 @@ class StudentOperations:
         self.mydb.commit()
         
 
-
+    # Adds the course to the dictionary and calls the save function to save action
     def add_student(self, student):
+
         # Check if the student ID already exists
         if student.Student_id in self.students:
-            return False  # Student already exists
+            return False                        # Student already exists
         self.students[student.Student_id] = student
         self.save_students_to_mysql()
-        return True  # Student added successfully
+        return True                             # Student added successfully
 
+
+
+    # Deletes the student using the DELETE FROM query directly
     def delete_student(self, student_id):
         if student_id in self.students:
             del self.students[student_id]
@@ -189,6 +213,9 @@ class StudentOperations:
         else:
             return False  # Student not found
         
+
+    # Updates the course by calling the UpdateStudent Procedure
+    # Also updates local dictionary
     def update_student(self, student_id_old, student_id_new, student_name_new, gender_new, year_lvl_new, course_code_new):
         sql_update_student = "CALL UpdateStudent(%s, %s, %s, %s, %s, %s)"
         values_update_student = (student_id_new, student_name_new, gender_new, year_lvl_new, course_code_new, student_id_old)
@@ -206,54 +233,3 @@ class StudentOperations:
             self.students[student_id_new] = student_obj
         
 
-
-
-
-# Example usage of the classes
-
-# Initialize CourseOperations and StudentOperations
-course_ops = CourseOperations(host="localhost", user="root", password="2022-1729", database="SSIS_DATABASE")
-student_ops = StudentOperations(host="localhost", user="root", password="2022-1729", database="SSIS_DATABASE")
-
-# Adding courses
-course1 = Course(course_name="Bachelor of Science in Information Systems", course_code="BSIS")
-course2 = Course(course_name="Bachelor of Science in Accounting", course_code="BSA")
-
-#course_ops.add_course(course1)
-#course_ops.add_course(course2)
-
-#for key, value in course_ops.courses.items():
-    #print(f"Key: {key}, Value: {value}")
-
-# Adding students
-#student1 = Student(Student_id="001", Name="John Doe", Age=20, Year_level="2nd Year", Gender="Male", Course_code="MATH101")
-#student2 = Student(Student_id="2022-0802", Name="Jane Smith", Year_level="2nd Year", Gender="Female", Course_code="BSA")
-
-#student_ops.add_student(student1)
-#student_ops.add_student(student2)
-
-# Deleting a course and updating students enrolled in that course
-#course_ops.update_course("BSCS","BSIT","Bachelor of Science in Information Technology")
-
-# Deleting a student
-#student_ops.delete_student("002")
-#course_ops.delete_course("BSCPE")
-
-# Create a Student object using the Course object
-#student1 = Student(Student_id="S001", Name="John Doe", Gender="Male", Year_level=1, Course_code="BSIT")
-
-
-'''
-print("\nAFTER DELETING")
-for key, value in course_ops.courses.items():
-    print(f"Key: {key}, Value: {value}")
-
-print("\n")
-
-student_ops.update_student("2022-1729","2022-1729","Klien Dalin","Male","2nd Year","BSArts")
-
-for key, value in student_ops.students.items():
-    print(f"Key: {key}, Value: {value}")
-'''
-
-#student_ops.update_student("2022-0802","2022-0802","Jane Smith","Female","2nd Year","BSA")

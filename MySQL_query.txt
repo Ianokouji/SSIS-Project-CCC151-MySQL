@@ -1,0 +1,79 @@
+
+Procedures: 
+
+1. DeleteCourse
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteCourse`(IN course_code_old VARCHAR(50))
+BEGIN
+    SET foreign_key_checks = 0;
+
+    DELETE FROM COURSES WHERE Course_Code = course_code_old;
+    
+    SET foreign_key_checks = 1;
+END
+
+
+2. UpdateCourse
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateCourse`(
+    IN Course_Code_New VARCHAR(50),
+    IN Course_Name_New VARCHAR(255),
+    IN Course_Code_Old VARCHAR(50)
+)
+BEGIN
+	SET FOREIGN_KEY_CHECKS=0;
+    UPDATE COURSES
+    SET Course_Code = Course_Code_New,
+    Course_Name = Course_Name_New
+    WHERE Course_Code = Course_Code_Old;
+    SET FOREIGN_KEY_CHECKS=1;
+END
+
+
+3. UpdateStudent
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateStudent`(IN Student_ID_New VARCHAR(9),
+							   IN Student_Name_New VARCHAR(50),
+							   IN Gender_New VARCHAR(10),
+                               IN Year_lvl_New VARCHAR(20),
+                               IN Course_Code_New VARCHAR(50),
+                               IN Student_ID_OLD VARCHAR(50)
+                                )
+BEGIN
+    UPDATE STUDENTS
+	SET Student_ID = Student_ID_New,
+		Student_Name = Student_Name_New,
+		Gender = Gender_New,
+        Year_lvl = Year_lvl_New,
+        Course_Code = Course_Code_New
+        WHERE Student_ID = Student_ID_OLD;
+	
+END
+
+
+
+Triggers:
+
+1. before_delete_course
+CREATE DEFINER=`root`@`localhost` TRIGGER `before_delete_course` BEFORE DELETE ON `courses` FOR EACH ROW BEGIN
+    UPDATE STUDENTS SET Course_Code = 'Not Enrolled' WHERE Course_Code = OLD.Course_Code;
+END
+
+
+Table:
+
+CREATE TABLE `students` (
+  `Student_ID` varchar(9) NOT NULL,
+  `Student_Name` varchar(50) DEFAULT NULL,
+  `Gender` varchar(10) DEFAULT NULL,
+  `Year_lvl` varchar(20) DEFAULT NULL,
+  `Course_Code` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`Student_ID`),
+  UNIQUE KEY `Student_Name` (`Student_Name`),
+  KEY `Course_Code` (`Course_Code`),
+  CONSTRAINT `students_ibfk_1` FOREIGN KEY (`Course_Code`) REFERENCES `courses` (`Course_Code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `courses` (
+  `Course_Code` varchar(50) NOT NULL,
+  `Course_Name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`Course_Code`),
+  UNIQUE KEY `Course_Name` (`Course_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5 import QtCore 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QStyleFactory, QTableWidgetItem,QStyledItemDelegate
-from SSIS_InterfaceF import Ui_MainWindow  
+from PyQt5.QtWidgets import QApplication, QStyleFactory, QTableWidgetItem
+from SSIS_Interface_Final import Ui_MainWindow  
 from PyQt5.QtGui import QColor
 
 
@@ -17,9 +17,12 @@ class Controller:
         self.main_window = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.main_window)
+        
 
+        # Global variables used to fetch old data as condition for update
         self.old_student_id = None
         self.old_course_code = None
+
 
 
         # Create instances of database operations classes
@@ -31,12 +34,7 @@ class Controller:
         self.Mode = ["View", "Edit", "Delete"]
         self.current_mode = "View"                   # Initial mode is View mode
 
-        # Connect itemClicked signals to slot functions (initially disabled)
-        #self.ui.StudentTable.itemClicked.connect(self.handle_item_click)
-        #self.ui.CourseTable.itemClicked.connect(self.handle_item_click)
-        #self.disable_table_clicks()
-
-        #------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        #----------------------------------------------------------------------------------------------------------------------------------------------------------------
         # Button Connects
 
         self.ui.ViewButton.clicked.connect(self.set_view_mode)
@@ -45,11 +43,13 @@ class Controller:
         self.ui.AddStudentB.clicked.connect(self.set_addStudent)
         self.ui.AddCourseB.clicked.connect(self.set_addCourse)
 
+
+
+
+        
         self.ui.CourseTable.itemClicked.connect(self.Mode_Handler)
         self.ui.StudentTable.itemClicked.connect(self.Mode_Handler)
 
-        self.ui.CourseTable.itemDoubleClicked.connect(self.DisableDoubleClicks)
-        self.ui.StudentTable.itemDoubleClicked.connect(self.DisableDoubleClicks)
 
         self.ui.SaveStudentEdit.clicked.connect(self.UpdateStudent)
         self.ui.SaveCourseEdit.clicked.connect(self.UpdateCourse)
@@ -61,16 +61,24 @@ class Controller:
         self.ui.SaveCourse.clicked.connect(self.AddCourse)
 
     
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Event Handlers
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     def set_addCourse(self):
         self.ChangeWidget(2)
 
     def set_addStudent(self):
         self.ChangeWidget(1)
 
+    
+
+
+
     # Edit mode Condition
     def set_edit_mode(self):
         self.current_mode = "Edit"
-        self.ChangeWidget(6)
+        self.ChangeWidget(7)
         self.EditState()
        
 
@@ -106,8 +114,6 @@ class Controller:
     
     
     def Mode_Handler(self, item):
-        
-
 
         # Edit mode initialization
         if self.current_mode == "Edit":
@@ -131,42 +137,23 @@ class Controller:
             if item.tableWidget() == self.ui.CourseTable:  # Use self.ui.CourseTable
                 # Change the stacked widget to the corresponding index for course table in edit mode
                 self.ChangeWidget(5)
-                self.ui.CourseTable.itemClicked.connect(self.confirmDeleteCourse)
+                self.ui.CourseTable.clicked.connect(self.confirmDeleteCourse)
                 
 
             elif item.tableWidget() == self.ui.StudentTable:  # Use self.ui.StudentTable
                 # Change the stacked widget to the corresponding index for student table in edit mode
                 self.ChangeWidget(5)
-                self.ui.StudentTable.itemClicked.connect(self.confirmDeleteStudent)
-                
+                self.ui.StudentTable.clicked.connect(self.confirmDeleteStudent)
 
                 
 
         # View mode initialization
         else:
             self.ChangeWidget(0)
-            self.UpdateCourseTable()
-            self.UpdateStudentTable()
+            
        
-            # Disconnect the signal first to avoid duplicate connections
-            # Results in tables being untamperable
-            self.ui.CourseTable.itemClicked.connect(self.ViewModeClicks)
-            self.ui.CourseTable.itemClicked.disconnect(self.ViewModeClicks)
             
-            self.ui.StudentTable.itemClicked.connect(self.ViewModeClicks)
-            self.ui.StudentTable.itemClicked.disconnect(self.ViewModeClicks)
-            
-    
-            
-
-
-
-    
-    def DisableDoubleClicks(self):
-        QMessageBox.critical(self.main_window, "WARNING", "PLEASE DO NOT DOUBLE CLICK ON THE TABLE")
-
-    def ViewModeClicks(self):
-        QMessageBox.critical(self.main_window, "VIEW MODE", "CANNOT EDIT IN VIEW MODE")
+        
 
 
     # Functionality for changing Stacked Widgets
@@ -180,35 +167,39 @@ class Controller:
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    
+    # Updates the course table everytime a change is made
     def UpdateCourseTable(self):
         self.ui.CourseTable.clearContents()  # Clear the table contents
 
         # Collect course data in a list of tuples
-        course_data = []  # Creates a data structure to store the course tuples
-        for course_code, course in self.course_operations.courses.items():  # Loops through the dictionary using course code as keys
-            course_tuple = (course_code, course.course_name)  # Creates course tuple for each course
-            course_data.append(course_tuple)  # Appends the created tuple to the data structure
+        course_data = []                                                        # Creates a data structure to store the course tuples
+        for course_code, course in self.course_operations.courses.items():      # Loops through the dictionary using course code as keys
+            course_tuple = (course_code, course.course_name)                    # Creates course tuple for each course
+            course_data.append(course_tuple)                                    # Appends the created tuple to the data structure
 
-        sorted_course_data = sorted(course_data, key=lambda x: x[0])  # Sort course data based on course code
+        sorted_course_data = sorted(course_data, key=lambda x: x[0])            # Sort course data based on course code
 
-        total_rows = len(sorted_course_data)  # Gets the total number of courses
-        self.ui.CourseTable.setRowCount(total_rows)  # Sets the number of rows in the table
-        self.ui.CourseTable.setColumnCount(2)  # Sets the number of columns in the table
+        total_rows = len(sorted_course_data)                                    # Gets the total number of courses
+        self.ui.CourseTable.setRowCount(total_rows)                             # Sets the number of rows in the table
+        self.ui.CourseTable.setColumnCount(2)                                   # Sets the number of columns in the table
 
         # Populate the table with sorted data
         for count, course_tuple in enumerate(sorted_course_data):
-            course_code, course_name = course_tuple  # Unpacks tuple and assigns to variables
-            course_code_item = QTableWidgetItem(course_code)  # Creates QTableWidgetItem for course code
-            course_name_item = QTableWidgetItem(course_name)  # Creates QTableWidgetItem for course name
+            course_code, course_name = course_tuple                             # Unpacks tuple and assigns to variables
+            course_code_item = QTableWidgetItem(course_code)                    # Creates QTableWidgetItem for course code
+            course_name_item = QTableWidgetItem(course_name)                    # Creates QTableWidgetItem for course name
 
             # Set the text color for the items
-            course_code_item.setForeground(QColor("#00C9FF"))  # Set text color to #00C9FF
-            course_name_item.setForeground(QColor("#00C9FF"))  # Set text color to #00C9FF
+            course_code_item.setForeground(QColor("#00C9FF"))                   # Set text color to #00C9FF
+            course_name_item.setForeground(QColor("#00C9FF"))                   # Set text color to #00C9FF
 
-            self.ui.CourseTable.setItem(count, 0, course_code_item)  # Sets course code in the first column
+            self.ui.CourseTable.setItem(count, 0, course_code_item)             # Sets course code in the first column
             self.ui.CourseTable.setItem(count, 1, course_name_item)
 
+
+
+    # Function that handles adding course 
+    # Handling format and conditions for course
     def AddCourse(self):
         try:
             course_name = self.ui.CourseNameAdd.toPlainText()
@@ -236,51 +227,48 @@ class Controller:
         return  
 
 
-    # Course Deletion in UI function
-    def deleteCourse(self, item):
+    # Function that sends the course code of the course to be deleted in the course operations
+    def deleteCourse(self):
         try:
-            row = item.row()  # Get the row of the item when a user clicks on that row
-            course_code_item = self.ui.CourseTable.item(row, 0)  # Get the course code of the item to be deleted
             
-            if course_code_item:
-                course_code = course_code_item.text()  # Get the course code as text
+            item = self.ui.DeleteOutput.text()                                      # Get the course code as text
+            if item:
+                course_code = item   
                 
                 # Update the enrollment status of students in the deleted course
                 for i in range(self.ui.StudentTable.rowCount()):
-                    course_code_item = self.ui.StudentTable.item(i, 4)  # Get the course code item for the current student
+                    course_code_item = self.ui.StudentTable.item(i, 4)              # Get the course code item for the current student
                     if course_code_item and course_code_item.text() == course_code:
-                        course_code_item.setText("Not Enrolled")  # Update the course code to "Not Enrolled"
+                        course_code_item.setText("Not Enrolled")                    # Update the course code to "Not Enrolled"
                         
                 # Delete the course and update UI
                 if self.course_operations.delete_course(course_code):
-                    self.ui.CourseTable.removeRow(row)  # Remove the row from the course table
-                    self.UpdateComboBoxCourse_EDIT()  # Update the course ComboBox in the student table UI
+                    
+                    # Update the UI from the changes
+                    self.UpdateCourseTable()
+                    self.UpdateComboBoxCourse_EDIT()  
                     self.UpdateComboBoxCourse()
                     QMessageBox.information(self.main_window, "Course Deletion", "Course deleted successfully.")
-                else:
-                    QMessageBox.warning(self.main_window, "Error", "Course deletion error occurred.")
+                    self.ui.DeleteOutput.setText("")
+                    
         except Exception as e:
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
 
 
-    # Event Handler for Course Deletion
+    # Displays course for deletion in StackedWidget
     def confirmDeleteCourse(self, item):
         try:
+            
             # Get the row and course code to be deleted
             row = item.row()
             course_code_item = self.ui.CourseTable.item(row, 0)
-            
-            if course_code_item:
-                course_code = course_code_item.text()
+            course_code = course_code_item.text()
 
-                # Prompt the user for confirmation
-                reply = QMessageBox.question(self.main_window, 'Confirmation', f'Do you want to delete the course {course_code}?',
-                                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-                if reply == QMessageBox.Yes:
-                    self.deleteCourse(item)  # Call the deleteCourse function if the user confirms
-                else:
-                    # User chose not to delete, do nothing or handle as needed
-                    pass
+            if course_code:
+                
+                self.ui.DeleteOutput.setText(course_code)
+                self.ui.ExecuteDelete.clicked.connect(self.deleteCourse)
+
         except Exception as e:
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
 
@@ -296,8 +284,9 @@ class Controller:
 
 
 
-    # Displays the courses that has been clicked into the LineEdits for Editing
+    # Displays the course information that has been clicked into the LineEdits for Editing
     def CourseSelect(self,item):
+        
         row = item.row()
         course_code_item = self.ui.CourseTable.item(row, 0)
         course_name_item = self.ui.CourseTable.item(row, 1)
@@ -311,6 +300,9 @@ class Controller:
             self.ui.CourseCodeCourseEdit.setText(course_code)
             self.ui.CourseNameEdit.setText(course_name)
 
+
+
+    # Function that updates course and displays changes in the student and course table
     def UpdateCourse(self):
         try:
             if (self.ui.CourseNameEdit and self.ui.CourseCodeCourseEdit):
@@ -319,7 +311,9 @@ class Controller:
 
                 # Check if the new student ID is unique
                 for key in self.course_operations.courses.keys():
+
                     # Skip the old student ID
+                    # It means the Course Name is the only element that is updated
                     if key == old_course_code:
                         continue
                     
@@ -339,7 +333,7 @@ class Controller:
                         course_code_item.setText(course_code_edited)  # Update the course code to "Not Enrolled"
                         
 
-
+                # Update the UI from the changes
                 self.UpdateCourseTable()
                 self.UpdateComboBoxCourse_EDIT()
                 self.UpdateComboBoxCourse()
@@ -348,23 +342,21 @@ class Controller:
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
 
 
+
+    # Search Course and display results in Course table
     def search_course(self):
         try:
             # Get the search input from the SearchCourse LineEdit
             search_input = self.ui.SearchCourse.text().lower()
 
-            # Check if the search input exceeds 9 characters
-            #if len(search_input) > 8:
-                #QMessageBox.warning(self.main_window, "Input Limit Exceeded", "Search input cannot exceed 9 characters.")
-                #return
-
+            
             # Clear the table contents before populating with search results
             self.ui.CourseTable.clearContents()
 
             # Filter the courses based on the search input (partial matching)
             filtered_courses = []
             for course_code, course in self.course_operations.courses.items():
-                if search_input in course_code.lower():  # Check if the search input is a partial match for the course code
+                if search_input in course_code.lower():                 # Check if the search input is a partial match for the course code
                     course_tuple = (course_code, course.course_name)
                     filtered_courses.append(course_tuple)
 
@@ -373,9 +365,9 @@ class Controller:
                 QMessageBox.warning(self.main_window, "Search Course Error", "No courses found")
                 return
 
-            total_rows = len(filtered_courses)  # Get the total number of filtered courses
-            self.ui.CourseTable.setRowCount(total_rows)  # Set the number of rows in the table
-            self.ui.CourseTable.setColumnCount(2)  # Set the number of columns in the table
+            total_rows = len(filtered_courses)                          # Get the total number of filtered courses
+            self.ui.CourseTable.setRowCount(total_rows)                 # Set the number of rows in the table
+            self.ui.CourseTable.setColumnCount(2)                       # Set the number of columns in the table
 
             # Populate the table with filtered course data and set text color
             for count, course_tuple in enumerate(filtered_courses):
@@ -398,6 +390,8 @@ class Controller:
     # Students Operations
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+    # Updates the students table everytime a change is made
     def UpdateStudentTable(self):
         self.ui.StudentTable.clearContents()  # Clear the table contents
 
@@ -448,6 +442,7 @@ class Controller:
 
 
     
+    # Displays the student information that has been clicked into the LineEdits for Editing
     def StudentSelect(self, item):
         row = item.row()
         student_id_item = self.ui.StudentTable.item(row, 0)
@@ -479,9 +474,9 @@ class Controller:
             if course_code_index >= 0:
                 self.ui.CouseCodeEdit.setCurrentIndex(course_code_index)
 
-            #return student_id, name, gender, year_level, course_code
+            
 
-        
+    # Function that updates a student and displays changes in the student table
     def UpdateStudent(self):
         try:
             # Check if the required data is not None
@@ -528,41 +523,46 @@ class Controller:
             # Display an error message if an exception occurs during the update process
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
     
-    def deleteStudent(self,item):
+
+
+    # Function that sends the student id of the student to be deleted in the student operations
+    def deleteStudent(self):
         try:
-            row = item.row()
-            student_id_item = self.ui.StudentTable.item(row,0)
-            if student_id_item:
-                student_id = student_id_item.text()
+            #row = item.row()
+            #student_id_item = self.ui.StudentTable.item(row,0)
+            item = self.ui.DeleteOutput.text()
+            if item:
+                student_id = item
                 if self.student_operations.delete_student(student_id):
-                    self.ui.StudentTable.removeRow(row)
+                    #self.ui.StudentTable.removeRow(row)
+                    self.UpdateStudentTable()
                     QMessageBox.information(self.main_window, "Student Deletion", "Student deleted successfully.")
-                else:
-                     QMessageBox.warning(self.main_window, "Error", "Student deletion error occurred.")
+                    self.ui.DeleteOutput.setText("")
+
         except Exception as e:
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
-            
+
+
+    # Displays student for deletion in StackedWidget 
     def confirmDeleteStudent(self,item):
         try:
+            #self.ChangeWidget(6)
             row = item.row()
             student_id_item = self.ui.StudentTable.item(row,0)
+            student_id = student_id_item.text()
 
-            if student_id_item:
-                student_id = student_id_item.text()
-
-                # Prompt the user for confirmation
-                reply = QMessageBox.question(self.main_window, 'Confirmation', f'Do you want to delete student with ID Number: {student_id}?',
-                                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-                if reply == QMessageBox.Yes:
-                    self.deleteStudent(item)  # Call the deleteCourse function if the user confirms
-                else:
-                    # User chose not to delete, do nothing or handle as needed
-                    pass
+            if student_id:
+                
+                self.ui.DeleteOutput.setText(student_id)
+                self.ui.ExecuteDelete.clicked.connect(self.deleteStudent)  
 
         except Exception as e:
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
     
-    
+
+
+    # Function that handles adding course 
+    # Handling format and conditions for course
     def AddStudent(self):
         try:
             student_name = self.ui.Name.text()
@@ -595,7 +595,7 @@ class Controller:
     
 
    
-
+    # Search Student and display results in Students table
     def search_student(self):
         try:
             # Get the search input from the SearchStudent LineEdit
@@ -612,7 +612,7 @@ class Controller:
             # Filter the students based on the search input (partial matching)
             filtered_students = []
             for student_id, student in self.student_operations.students.items():
-                if search_input in student_id:  # Check if the search input is a partial match for the student ID
+                if search_input in student_id:                                          # Check if the search input is a partial match for the student ID
                     student_tuple = (student_id, student.Name, student.Gender, student.Year_level, student.Course_code)
                     filtered_students.append(student_tuple)
 
@@ -621,9 +621,9 @@ class Controller:
                 QMessageBox.warning(self.main_window, "Search Student Error", "No students found")
                 return
 
-            total_rows = len(filtered_students)  # Get the total number of filtered students
-            self.ui.StudentTable.setRowCount(total_rows)  # Set the number of rows in the table
-            self.ui.StudentTable.setColumnCount(5)  # Set the number of columns in the table
+            total_rows = len(filtered_students)                                         # Get the total number of filtered students
+            self.ui.StudentTable.setRowCount(total_rows)                                # Set the number of rows in the table
+            self.ui.StudentTable.setColumnCount(5)                                      # Set the number of columns in the table
 
             # Populate the table with filtered student data and set text color
             for count, student_tuple in enumerate(filtered_students):
@@ -650,11 +650,13 @@ class Controller:
             QMessageBox.critical(self.main_window, "Error", f"An error occurred: {str(e)}")
 
 
+    # Functions that updates comboboxes from Course Codes and Genders
+
 
     def update_gender_combobox_EDIT(self):
         # Clear existing items in the GenderEdit QComboBox
         self.ui.GenderEdit.clear()
-        self.gender_options = ["Male", "Female", "Other"]
+        self.gender_options = ["Male", "Female"]
         # Add items to the GenderEdit QComboBox based on the gender_options list
         self.ui.GenderEdit.addItems(self.gender_options)
 
@@ -668,8 +670,6 @@ class Controller:
 
     def UpdateComboBoxCourse_EDIT(self):
         self.ui.CouseCodeEdit.clear()  # Clear the comboBox first
-
-        self.ui.CouseCodeEdit.addItem("Not Enrolled")  # Set "Not Enrolled" as the default item
 
         # Get all available course codes from course_operations
         course_codes = [course.course_code for course in self.course_operations.courses.values()]
@@ -687,16 +687,17 @@ class Controller:
 
 
     def UpdateComboBoxCourse(self):
-        self.ui.CouseCode.clear()  # Clear the comboBox first
 
-        self.ui.CouseCode.addItem("Not Enrolled")  # Set "Not Enrolled" as the default item
+        # Clear the comboBox first
+        self.ui.CouseCode.clear()   
 
         # Get all available course codes from course_operations
         course_codes = [course.course_code for course in self.course_operations.courses.values()]
 
         # Add the course codes to the comboBox with colors
         for course_code in course_codes:
-            index = self.ui.CouseCode.addItem(course_code)  # Get the index directly
+             # Get the index directly
+            index = self.ui.CouseCode.addItem(course_code)     
             
 
         # Set the item text color directly in the combobox's model
@@ -705,10 +706,11 @@ class Controller:
             index = model.index(i, self.ui.CouseCode.modelColumn())
             model.setData(index, QColor("#00C9FF"), role=Qt.TextColorRole)
 
+
     def update_gender_combobox(self):
         # Clear existing items in the GenderEdit QComboBox
         self.ui.Gender.clear()
-        self.gender_options = ["Male", "Female", "Other"]
+        self.gender_options = ["Male", "Female"]
         # Add items to the GenderEdit QComboBox based on the gender_options list
         self.ui.Gender.addItems(self.gender_options)
 

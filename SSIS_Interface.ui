@@ -58,7 +58,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="Default">
       <widget class="QFrame" name="frame_8">
@@ -628,6 +628,29 @@ QFrame &gt; * {
         </property>
        </widget>
       </widget>
+      <widget class="QPushButton" name="ExecuteDeleteStudent">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>390</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Save Changes</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #FF073A;
+    color: #FFFF00;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>DELETE</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="EditCoursePage">
       <widget class="QFrame" name="frame_4">
@@ -769,6 +792,29 @@ QLineEdit::placeholder {
         <string>SAVE</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="ExecuteDeleteCourse">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>390</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Save Changes</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #FF073A;
+    color: #FFFF00;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>DELETE</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="DeletePage">
       <widget class="QFrame" name="frame_5">
@@ -824,9 +870,9 @@ QFrame &gt; * {
       <widget class="QFrame" name="frame_6">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>200</y>
-         <width>161</width>
+         <x>10</x>
+         <y>140</y>
+         <width>171</width>
          <height>171</height>
         </rect>
        </property>
@@ -850,7 +896,7 @@ QFrame &gt; * {
          <rect>
           <x>10</x>
           <y>30</y>
-          <width>151</width>
+          <width>161</width>
           <height>41</height>
          </rect>
         </property>
@@ -885,8 +931,8 @@ QFrame &gt; * {
       <widget class="QFrame" name="frame_7">
        <property name="geometry">
         <rect>
-         <x>25</x>
-         <y>120</y>
+         <x>20</x>
+         <y>80</y>
          <width>151</width>
          <height>41</height>
         </rect>
@@ -931,6 +977,283 @@ QFrame &gt; * {
          <string>! WARNING !</string>
         </property>
        </widget>
+      </widget>
+      <widget class="QFrame" name="frame_14">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>330</y>
+         <width>181</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_18">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>171</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>Are you sure you want to delete:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="DeleteOutput">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>50</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="ExecuteDelete">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>100</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Save Changes</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    border: 2px solid #FF073A;
+    color: #FFFF00;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+        </property>
+        <property name="text">
+         <string>DELETE</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="DeleteHandle">
+      <widget class="QFrame" name="frame_11">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_15">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FF073A;
+}</string>
+        </property>
+        <property name="text">
+         <string>DELETE MODE</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_12">
+       <property name="geometry">
+        <rect>
+         <x>25</x>
+         <y>120</y>
+         <width>151</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_16">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>! WARNING !</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_13">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>190</y>
+         <width>171</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    border: 2px solid #FF073A;
+}
+
+QFrame &gt; * {
+    border: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_17">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>161</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>Are you sure you want to delete:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="DeleteOutpute2">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>90</y>
+          <width>71</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    color: #FFFF00;
+}</string>
+        </property>
+        <property name="text">
+         <string>Object</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="SaveStudentEdit_2">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>400</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Save Changes</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    border: 2px solid #FF073A;
+    color: #FFFF00;  /* Text color of QPushButton */
+    text-align: center;  /* Center-align text in QPushButton */
+}</string>
+       </property>
+       <property name="text">
+        <string>DELETE</string>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="DefaultEditPage">
